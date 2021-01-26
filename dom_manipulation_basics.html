@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>DOM Manipulation</title>
+
+    <style>
+      .big {font-size:3em; }
+      .blue {color: blue;}
+      .bigBorder {border: black 3px solid;}
+    </style>
+
+  </head>
+  <body>
+
+    <div id="div1" class="bigBorder" ></div>
+    <div id="div2">
+      <img src="">
+    </div>
+    <div id="div3">
+      This div should be programmatically removed.
+    </div>
+
+    <ul>
+      <li class="big blue">IT202</li>
+    </ul>
+
+    <script>
+      // your code here
+
+      let div1 = document.getElementById("div1");
+      div1.innerHTML = "UIC";
+
+      div1.setAttribute("style","background-color:#D50032;");      
+      
+      div1.classList.add("big");
+      
+      let img = document.querySelector("img");
+      img.setAttribute("src","https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/University_of_Illinois_at_Chicago_circle_logo.svg/1200px-University_of_Illinois_at_Chicago_circle_logo.svg.png");
+      img.setAttribute("style","width:25%;height:25%"); //Change image wide and height as 1/4 of original size
+
+      document.getElementById("div3").remove(); //Remvoe the element that id is "div3" 
+
+      document.title="kqi3" //Change the title in the head 
+      
+      let li = document.createElement("li")
+      li.innerHTML="Computer Science"  // Set li text content
+      document.querySelector("ul").appendChild(li);  //Add li element to unorder li
+      let li_elements = document.querySelectorAll("li") //Get all li element as array
+      li_elements[0].removeAttribute("class","big") // Remove the first li class name big 
+      li_elements[1].setAttribute("class","blue") // Set second li class name to blue
+
+      let img2 = img.cloneNode(true) // Get a clone of image
+      div1.appendChild(img2)  //Append the clone to div1
+
+
+
+
+
+
+
+
+      //3
+
+      //4
+
+      //5
+
+      //6
+
+      //7
+
+      //8 
+
+      //9
+
+      //10
+
+      //11
+
+      //12
+
+      //13
+
+      //14
+
+
+
+    </script>
+
+
+  </body>
+</html>
