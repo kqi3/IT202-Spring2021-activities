@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--Student : Kai Qi   UIN: 672830635 Lab3 Spring 2021-->
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>IT202 2021-01-20</title>
+</head>
+
+<body>
+<script type="text/javascript">
+   fetch("https://api.nasa.gov/planetary/apod?api_key=l80xGm5w1vOK8voJDs9JNfbmtFRYQWT8Z4iWMaD1")  // Connect a url
+   .then((response) =>{
+      return response.json();  //Get a promise object
+   })
+   .then((json)=>{
+	 let h1 = document.createElement("h1");
+    h1.innerText= json.title;
+    document.body.appendChild(h1);
+  let img = document.createElement("img");
+  img.setAttribute("src",json.hdurl);
+  document.body.appendChild(img);
+  var element = document.createElement("p");  //Create a p element in document
+  element.innerText= json.explanation;  // set text content to json content
+  document.body.appendChild(element);   // Add p element to body
+  
+
+});
+
+  
+
+</script>
+  
+</body>
+
+</html>
