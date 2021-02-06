@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--Student : Kai Qi  Week 4 homework -->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+  </head>
+  <body>
+  <h1>Form Basics</h1>
+  <form action="/action_page.php" id="form1" name="form1" method="post">
+      <label for="text1">name:</label>
+      <input type="text" id="text1" name="text1"><br><br>
+      <p>Please select your color:</p>
+          <input type="radio" id="red" name="radio1" value="red">
+          <label for="red">red</label><br>
+          <input type="radio" id="green" name="radio1" value="green">
+          <label for="green">green</label><br>
+          <input type="radio" id="blue" name="radio1" value="blue">
+          <label for="blue">blue</label><br><br>
+      <label for="select1">Select a day:</label>
+        <select id="select1" name="select1">
+          <option value="Mon">Mon</option>
+          <option value="Wed">Wed</option>
+          <option value="Fri">Fri</option>
+         
+        </select><br><br>
+      <label for="textarea1">Input some text below:</label><br>
+      <textarea id="textarea1" name="textarea1" placeholder="Please provide any additional feedback" rows="5" cols="30"></textarea>
+      
+      
+      <input type="submit" value="Submit">
+  </form>
+
+
+
+
+
+    <p id="uptonSinclairQuote">
+It is difficult to get a man to understand something, when his salary depends upon his not understanding it! -- Upton Sinclair
+    </p>
+
+
+    <script>
+         document.querySelector("#text1").setAttribute("value","Kai Qi");
+         document.querySelectorAll('input[name="radio1"]')[1].setAttribute("checked",true);
+         let quotation = document.querySelector("#uptonSinclairQuote").innerText;
+         document.querySelector("#textarea1").innerText= quotation;
+         document.querySelector('#select1').addEventListener("change",myChange);
+         function myChange(){
+             console.log(this.value);
+             alert(this.value);
+         }
+
+    </script>
+  </body>
+</html>
