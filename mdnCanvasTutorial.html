@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!-- Student: Kai Qi      Course:IT202 Week7 MDN Canvas Tutorial   Date: Feb,27,2021 -->
+<html>
+  <head>
+    
+    <meta charset="utf-8">
+
+    <title>Kai Qi IT202 Canvas Element</title>
+     
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <style>
+    body {
+      font-family: "Sofia", serif;
+      
+    }
+    </style>
+  </head>
+  <body>
+      <canvas id="myCanvas" width="500" height="500"></canvas>
+   <script>
+       let c = document.querySelector("#myCanvas");
+       c.style.backgroundColor="silver";
+       let ctx = c.getContext("2d");
+       //Defined the circle x,y coordinate and fill color
+       let x= c.width/4;
+       let y= c.height/4;
+       ctx.fillStyle="red";
+       //Defined the rectangle shadow properties
+       ctx.lineWidth = 3;
+       ctx.shadowBlur = 10;
+       ctx.shadowColor = "#000000"
+       ctx.shadowOffsetX = 10;//Offset along X axis
+       ctx.shadowOffsetY = -10; // Offset along Y axis
+       ctx.fillStyle = "blue"; // Fill the rectange color 
+       ctx.fillRect(100,20,200,100);//Draw the rectangle
+       //Create a image oject
+       let cat= new Image();
+       cat.src = "https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg";
+       //Draw a cat still image on top right corner
+       ctx.drawImage(cat,350,20,cat.width/100, cat.height/100);
+       ctx.font="100px Sofia"; // Get google font from head style link
+       //Create a color gradient variable to fill the stroke text
+       var gradient = ctx.createLinearGradient(0, 0, c.width, 0);
+       gradient.addColorStop("0", "magenta");
+       gradient.addColorStop("0.5", "blue");
+       gradient.addColorStop("1.0", "red");
+       ctx.strokeStyle=gradient;
+       ctx.strokeText('Kai Qi',200,450,200);
+       
+       
+       const draw =()=>{
+           ctx.clearRect(0,95,c.width,c.height/2);//Clean the old cavas
+           ctx.shadowOffsetX=0; //Delete shadow
+           ctx.shadowOffsetY=0; //Delete shadow
+           ctx.shadowColor="clear"; //Set shadow color to clear
+           ctx.shadowBlur=0;
+           x -=1;//Start draw circle from left to right
+           if(x<0){
+           x=c.width;
+       }
+           y = c.height/3;
+           //Draw two cat images moving from right to left because x coordinate decrease -1 in each loop
+           ctx.drawImage(cat,x+10,250,cat.width/100, cat.height/100);
+           ctx.drawImage(cat,x+80,280,cat.width/100, cat.height/100);
+           ctx.beginPath();
+           ctx.arc(x,y,30,0,Math.PI*2);
+           ctx.closePath();
+           ctx.fillStyle="red";
+           ctx.fill();
+       
+           window.requestAnimationFrame(draw);
+       }
+       
+       draw();
+       
+       
+   </script>   
+      
+      
+  </body>
+    
+</html>
