@@ -36,8 +36,14 @@
        //Create a image oject
        let cat= new Image();
        cat.src = "https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg";
-       //Draw a cat still image on top right corner
-       ctx.drawImage(cat,350,20,cat.width/100, cat.height/100);
+       let cats = new Image();
+       cats.src = "https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/KSN53VEFKII6RBKTUPHISA3MPA.jpg"
+       
+       //Draw cat still images at corners
+       ctx.drawImage(cats,410,10,cats.width/50, cats.height/50); //TOP Right Corner
+       ctx.drawImage(cats,10,10,cats.width/50, cats.height/50);  //Top Left corner
+       ctx.drawImage(cats,10,440,cats.width/50, cats.height/50); //Bottom left corner
+       ctx.drawImage(cats,410,440,cats.width/50, cats.height/50); //Bottom Right Corner
        ctx.font="100px Sofia"; // Get google font from head style link
        //Create a color gradient variable to fill the stroke text
        var gradient = ctx.createLinearGradient(0, 0, c.width, 0);
