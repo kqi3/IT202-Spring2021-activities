@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'School_Type');
+        data.addColumn('number', 'Count_Scool_Type');
+         //Get the SQL filtered data from data API json source ,fetch the asycho data from url below with SQL commands followd 
+        fetch("https://data.cityofchicago.org/resource/dw27-rash.json?$SELECT=school_type,count(school_type)&$GROUP=school_type")
+        .then((response)=>{ return response.json()})
+          .then((schools)=>{
+               schools.forEach((record)=>{               
+                  data.addRow([record.school_type,parseFloat(record.count_school_type)])
+                
+               });
+            
+     // Set chart options in fetch response handler
+        var options = {'title':'Chicago School Type',
+                       'width':400,
+                       'height':300,
+                        sliceVisibilityThreshold:.01}; //Set any 1%=0.01 line or below to combine to other
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.querySelector('#chart_div'));
+        chart.draw(data, options);
+            
+        })
+       
+          //Draw Line Chart about covid19 vaccine shot in City of Chicago
+        var covid19Vac = new google.visualization.DataTable(); //Create a table first
+        covid19Vac.addColumn('string','Date'); //Add a column to table
+        covid19Vac.addColumn('number','Sum_Total_Doses_Cumulative'); //Add a second column to table
+        covid19Vac.addColumn('number','1st_Dose_Cumulative'); //Add the third column name to table
+       fetch("https://data.cityofchicago.org/resource/553k-3xzc.json?$SELECT=date,sum(total_doses_cumulative),sum(_1st_dose_cumulative)&$GROUP=date&$ORDER=date")
+          .then((response)=>{ return response.json()})
+           .then((records)=>{
+              records.forEach((daily)=>{
+               covid19Vac.addRow([daily.date,parseFloat(daily.sum_total_doses_cumulative),parseFloat(daily.sum_1st_dose_cumulative)])
+              });
+           var options2 = {
+               'title': 'Chicago Covid-19 Vaccine Shot Cumulative',
+               'width': 800,
+               'height':400,
+               'legend':{position:'top'} //Set title ,table size and legend position
+           };
+           var chart2 = new google.visualization.LineChart(document.querySelector('#chart2'));
+            chart2.draw(covid19Vac,options2);                                              
+       })
+
+      }
+    </script>
+  </head>
+
+  <body>
+    <!--Div that will hold the pie chart-->
+    <div id="chart_div"></div><br>
+    <div id="chart2"></div>
+    
+      
+  </body>
+</html>
