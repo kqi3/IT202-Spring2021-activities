@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+     
+    </head>
+    <body>
+        <div>
+        <textarea class="textfield-content" id="textfield" name="textfield" rows="4" cols="50" placeholder="Enter some text you want speech">
+          
+        </textarea>
+        </div>
+        <div>
+        <label for="languages">Choose a language:</label>
+        <select id="languages" name="languages">
+          <option value="">Select a language</option>
+         </select>
+        </div>
+        <br>
+        <div>
+         <button id="Speech_Button" type="button" disabled>Speech voice click here</button>
+        </div>
+
+    <script>
+        let voices = speechSynthesis.getVoices();//First load will be empty voices because getVoice() is asynch method from server 
+        let utterance = new SpeechSynthesisUtterance("hello,world!");  // Set the speech content initialized with hello, world content
+        let voicesSelect = document.querySelector("select"); 
+        let button1  = document.querySelector("#Speech_Button");
+        utterance.text = "computer science, hello world"; // Load the text content you want to speech or change the text 
+        
+         //Asyc load the speechSynthesis.getVoices() if it voices array content changed from server or client installed
+        setTimeout(() => {
+           voices = speechSynthesis.getVoices();
+           
+           voices.forEach( voice => {
+           let optionContent = document.createElement("option");
+           optionContent.textContent = voice.name + ' (' + voice.lang + ')';
+           voicesSelect.appendChild(optionContent);
+           })
+            utterance.voice = voicesSelect.value; // Get the voice in asych load 
+        }, 1000); // timeout will be after 1 second
+        
+        voicesSelect.addEventListener("change", (event)=>{
+            document.querySelector("button").disabled= false;
+            
+        });
+        button1.addEventListener("click",(event)=>{
+            utterance.text = document.querySelector("#textfield").value;  
+            speechSynthesis.speak(utterance);
+        })
+       
+     
+    </script>
+    </body>
+</html>
